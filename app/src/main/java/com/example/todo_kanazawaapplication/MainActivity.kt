@@ -1,26 +1,19 @@
 package com.example.todo_kanazawaapplication
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.util.Date
 
 
 class MainActivity : AppCompatActivity() {
-    private val pagesList: Array<Page> = arrayOf(
-        Page(1, "あかさたな", "あいうえおかきくけこさしすせそたちつてとなにぬねの", Date()),
-        Page(2, "はまやらわ", "はひふえほまみむめもやゆよらりるれろわをん", Date()),
-        Page(3, "やゆよ", "よ", Date())
-    )
 
     private lateinit var pagesRecyclerView: RecyclerView
     private lateinit var pagesRecyclerViewComponent: PagesRecyclerViewComponent
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pageeditactuvity)
@@ -31,5 +24,11 @@ class MainActivity : AppCompatActivity() {
             layoutManager = pagesRecyclerViewComponent.viewManager
             adapter = pagesRecyclerViewComponent.viewAdapter // Adapterを設定
         }
+
+//        val detail:Button = findViewById(R.id.btntododetail)
+//        detail.setOnClickListener() {
+//            val intent = Intent(this, ShowDetailActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 }
