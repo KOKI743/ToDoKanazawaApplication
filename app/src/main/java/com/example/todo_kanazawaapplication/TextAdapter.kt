@@ -44,7 +44,7 @@ class PagesRecyclerViewComponent(data: Array<Page>, context: Context) {
                     Log.d("MyAdapter", "Button clicked for taskid: $taskid")
                     putExtra("taskid",taskid.toString())       // タスクのタイトルを渡す
                 }
-                holder.itemView.context.startActivity(intent) // 新しいアクティビティを開始
+                (holder.itemView.context as MainActivity).startActivityForResult(intent, MainActivity.REQUEST_CODE) // RESULTを受け取るためのリクエストコードを指定
             }
         }
     }
