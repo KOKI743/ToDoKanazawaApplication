@@ -11,11 +11,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class PagesRecyclerViewComponent(data: Array<Page>, context: Context) {
+class PagesRecyclerViewComponent(data: ArrayList<Page>, context: Context) {
     val viewManager: LinearLayoutManager = LinearLayoutManager(context)
     val viewAdapter: MyAdapter = MyAdapter(data)
 
-    class MyAdapter(private val data: Array<Page>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+    class MyAdapter(private val data: ArrayList<Page>) :
+        RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
         class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val title: TextView = itemView.findViewById(R.id.checkBox)
             val deadline: TextView = itemView.findViewById(R.id.deadlineText)
@@ -23,7 +24,8 @@ class PagesRecyclerViewComponent(data: Array<Page>, context: Context) {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_text, parent, false)
+            val view =
+                LayoutInflater.from(parent.context).inflate(R.layout.item_text, parent, false)
             return MyViewHolder(view)
         }
 
@@ -42,9 +44,9 @@ class PagesRecyclerViewComponent(data: Array<Page>, context: Context) {
                 // ボタンがクリックされたときの処理
                 val intent = Intent(holder.itemView.context, ShowDetailActivity::class.java).apply {
                     Log.d("MyAdapter", "Button clicked for taskid: $taskid")
-                    putExtra("taskid",taskid.toString())       // タスクのタイトルを渡す
+                    putExtra("taskid", taskid.toString())       // タスクのタイトルを渡す
                 }
-                (holder.itemView.context as MainActivity).startActivityForResult(intent, MainActivity.REQUEST_CODE) // RESULTを受け取るためのリクエストコードを指定
+                holder.itemView.context.startActivity(intent)
             }
         }
     }

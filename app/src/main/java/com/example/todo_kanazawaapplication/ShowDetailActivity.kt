@@ -1,15 +1,17 @@
 package com.example.todo_kanazawaapplication
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.time.LocalDate
 
 class ShowDetailActivity : AppCompatActivity() {
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,9 +21,9 @@ class ShowDetailActivity : AppCompatActivity() {
         val detailReturn: Button = findViewById(R.id.datailbtnreturn)
 
         val detail_title: TextView = findViewById(R.id.page_detail_title)
-        val detail_date:TextView = findViewById(R.id.page_detail_updated_at)
-        val detail_detail:TextView = findViewById(R.id.page_detail_fragment_host)
-        val updateButton:Button = findViewById(R.id.btnupdate)
+        val detail_date: TextView = findViewById(R.id.page_detail_updated_at)
+        val detail_detail: TextView = findViewById(R.id.page_detail_fragment_host)
+        val updateButton: Button = findViewById(R.id.btnupdate)
 
         val intent = intent // Intentを取得
         val todoid: String? = intent.getStringExtra("taskid") // "todoid"というキーでデータを取得
@@ -47,33 +49,28 @@ class ShowDetailActivity : AppCompatActivity() {
 
         // 更新ボタンのクリックリスナー
         updateButton.setOnClickListener {
-            // 新しい内容を取得
-            val newtitle = detail_title.text.toString()
-            val newdate = detail_date.text.toString()
-            val newdetail = detail_detail.text.toString()
             if (taskIdInt != null) {
-                // pagesListを更新
+                val updatedTitle = detail_title.text.toString() // 更新したタイトルを取得
+                val updatedContent = detail_detail.text.toString() // 更新した内容を取得
+                val updatedDeadline = detail_date.text.toString() // 更新した締切日を取得
+
+                // IDを元に配列を更新する
                 val index = pagesList.indexOfFirst { it.id == taskIdInt }
                 if (index != -1) {
-                    pagesList[index] = pagesList[index].copy(title = newtitle) // 内容を更新
-                    pagesList[index] = pagesList[index].copy(content = newdate) // 内容を更新
-                    pagesList[index] = pagesList[index].copy(content = newdetail) // 内容を更新
-                    Toast.makeText(this, "内容が更新されました", Toast.LENGTH_SHORT).show()
+                    // ページの内容を更新
+                    pagesList[index] = pagesList[index].copy(
+                        title = updatedTitle,
+                        content = updatedContent,
+                        deadline = LocalDate.parse(updatedDeadline) // 文字列を LocalDate に変換
+                    )
+
+                    finish() // 画面を閉じる
                 }
             }
-            Log.d("title", "title: ${detail_title.text}")
         }
 
-        // 戻るボタンのクリックリスナー
         detailReturn.setOnClickListener {
-            val resultIntent = Intent().apply {
-                putExtra("taskid", todoid) // 更新したタスクのIDを渡す
-                putExtra("title", detail_title.text.toString()) // 更新したタイトルを渡す
-                putExtra("content", detail_detail.text.toString()) // 更新した内容を渡す
-                putExtra("deadline", detail_date.text.toString()) // 更新した締切日を渡す
-            }
-            setResult(RESULT_OK, resultIntent) // 結果を設定
-            finish() // 画面遷移元へ戻る処理
+            finish() // 現在のアクティビティを閉じる
         }
     }
 }
