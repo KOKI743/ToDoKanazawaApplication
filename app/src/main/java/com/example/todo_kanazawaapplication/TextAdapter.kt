@@ -24,8 +24,7 @@ class PagesRecyclerViewComponent(data: ArrayList<Page>, context: Context) {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-            val view =
-                LayoutInflater.from(parent.context).inflate(R.layout.item_text, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_text, parent, false)
             return MyViewHolder(view)
         }
 

@@ -7,7 +7,6 @@ import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import java.time.LocalDate
 
 
 class MainActivity : AppCompatActivity() {

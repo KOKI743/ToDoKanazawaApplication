@@ -4,11 +4,12 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 
 class ShowDetailActivity : AppCompatActivity() {
 
@@ -54,17 +55,25 @@ class ShowDetailActivity : AppCompatActivity() {
                 val updatedContent = detail_detail.text.toString() // 更新した内容を取得
                 val updatedDeadline = detail_date.text.toString() // 更新した締切日を取得
 
+                val taskDate: LocalDate? = try {
+                    LocalDate.parse(updatedDeadline, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                } catch (e: DateTimeParseException) {
+                    Log.e("formatchenge","Localtimeerror")
+                    null
+                }
+
                 // IDを元に配列を更新する
                 val index = pagesList.indexOfFirst { it.id == taskIdInt }
-                if (index != -1) {
+                if (index != -1 && updatedTitle.isNotEmpty() && updatedContent.isNotEmpty() && taskDate != null) {
                     // ページの内容を更新
                     pagesList[index] = pagesList[index].copy(
                         title = updatedTitle,
                         content = updatedContent,
-                        deadline = LocalDate.parse(updatedDeadline) // 文字列を LocalDate に変換
+                        deadline = taskDate // 文字列を LocalDate に変換
                     )
-
                     finish() // 画面を閉じる
+                }else{
+                    Toast.makeText(this, "追加に失敗しました。\nもう一度確かめてみてください。", Toast.LENGTH_SHORT).show()
                 }
             }
         }

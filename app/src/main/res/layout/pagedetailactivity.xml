@@ -1,67 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">  <!-- heightをmatch_parentに変更 -->
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!-- タイトル -->
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="タスク詳細"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/page_detail_title"
-            style="@style/TextAppearance.MaterialComponents.Headline5"
-            android:layout_width="275dp"
-            android:layout_height="108dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="TextView"
-            android:textSize="34sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <!-- Name ラベル -->
+    <TextView
+        android:id="@+id/textViewNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="タスク名"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp" />
 
-        <EditText
-            android:id="@+id/page_detail_updated_at"
-            style="@style/TextAppearance.MaterialComponents.Caption"
-            android:layout_width="178dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/page_detail_updated_at_label"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/page_detail_title" />
+    <!-- Name 入力フィールド -->
+    <EditText
+        android:id="@+id/page_detail_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="タスク名入力"
+        android:minHeight="48dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewNameLabel" />
 
-        <EditText
-            android:id="@+id/page_detail_fragment_host"
-            style="@style/TextAppearance.MaterialComponents.Body2"
-            android:layout_width="182dp"
-            android:layout_height="91dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:text="TextView"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/page_detail_updated_at" />
+    <!-- Date ラベル -->
+    <TextView
+        android:id="@+id/textViewDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="日にち"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/page_detail_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp" />
 
-        <Button
-            android:id="@+id/datailbtnreturn"
-            android:layout_width="108dp"
-            android:layout_height="85dp"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+    <!-- Date 入力フィールド -->
+    <EditText
+        android:id="@+id/page_detail_updated_at"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="日にち入力"
+        android:inputType="date"
+        android:minHeight="48dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewDateLabel" />
 
-        <Button
-            android:id="@+id/btnupdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="更新"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+    <!-- Content ラベル -->
+    <TextView
+        android:id="@+id/textViewContentLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="タスク詳細"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/page_detail_updated_at"
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp" />
 
+    <!-- Content 入力フィールド -->
+    <EditText
+        android:id="@+id/page_detail_fragment_host"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="詳細入力"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewContentLabel" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <Button
+        android:id="@+id/datailbtnreturn"
+        android:layout_width="150dp"
+        android:layout_height="85dp"
+        android:text="戻る"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnupdate"
+        android:layout_width="150dp"
+        android:layout_height="85dp"
+        android:text="更新"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

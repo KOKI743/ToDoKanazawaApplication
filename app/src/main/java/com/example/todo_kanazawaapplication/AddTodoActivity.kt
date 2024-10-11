@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -44,6 +45,8 @@ class AddTodoActivity : AppCompatActivity() {
                 )
                 pagesList.add(newTask)
                 finish()
+            }else{
+                Toast.makeText(this, "追加に失敗しました。\nもう一度確かめてみてください。", Toast.LENGTH_SHORT).show()
             }
         }
 
