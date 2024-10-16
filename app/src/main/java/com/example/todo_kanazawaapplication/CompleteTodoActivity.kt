@@ -3,56 +3,70 @@ package com.example.todo_kanazawaapplication
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 
 class CompleteTodoActivity : AppCompatActivity() {
 
+    private lateinit var pagesRecyclerView: RecyclerView
+    private lateinit var pagesRecyclerViewComponent: EndPagesRecyclerViewComponent
+    //lateinit var adapter: PagesRecyclerViewComponent.MyAdapter  // Adapterを設定
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.addtodo)
+        setContentView(R.layout.endtodo)
 
         // EditText の変数は正しく型指定
-        val saveButton: Button = findViewById(R.id.addbtnOK)
-        val taskTitle: EditText = findViewById(R.id.editTextName)
-        val taskdate: EditText = findViewById(R.id.editTextDate)
-        val taskContent:EditText= findViewById(R.id.editTextContent)
-        val btnreturn:Button = findViewById(R.id.addbtnreturn)
+        val btnreturn: Button = findViewById(R.id.btnreturn)
+        val intent = intent
+        val checkedIds = intent.getIntArrayExtra("checkedIds")
 
-        // 更新ボタンのクリックリスナー
-        saveButton.setOnClickListener {
-            val taskTitletext = taskTitle.text.toString()
-            val taskContenttext = taskContent.text.toString()
-            val taskdateString = taskdate.text.toString()
+        if (checkedIds != null) {
+            val iterator = pagesList.iterator()  // イテレータを使用して安全にリストから削除
+            while (iterator.hasNext()) {
+                val page = iterator.next()
+                if (checkedIds.contains(page.id)) {
 
-            val taskDate: LocalDate? = try {
-                LocalDate.parse(taskdateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-            } catch (e: DateTimeParseException) {
-                Log.e("formatchenge","Localtimeerror")
-                null
-            }
+                    val taskTitletext = page.title
+                    val taskContenttext = page.content
+                    val taskdateString = page.deadline.toString()
 
-            if (taskTitletext.isNotEmpty() && taskContenttext.isNotEmpty() && taskDate != null) {
-                val newTask = Page(
-                    id = pagesList.size + 1,
-                    title = taskTitletext,
-                    content = taskContenttext,
-                    deadline = taskDate
-                )
-                pagesList.add(newTask)
-                finish()
-            }else{
-                Toast.makeText(this, "追加に失敗しました。\nもう一度確かめてみてください。", Toast.LENGTH_SHORT).show()
+                    val taskDate: LocalDate? = try {
+                        LocalDate.parse(taskdateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                    } catch (e: DateTimeParseException) {
+                        Log.e("formatchenge", "Localtimeerror")
+                        null
+                    }
+
+                    if (taskTitletext.isNotEmpty() && taskContenttext.isNotEmpty() && taskDate != null) {
+                        val newTask = Page(
+                            id = pagesList.size + 1,
+                            title = taskTitletext,
+                            content = taskContenttext,
+                            deadline = taskDate
+                        )
+                        endpagesList.add(newTask)
+
+                        iterator.remove()  // チェックされたIDに一致するアイテムを削除
+                    }
+                }
             }
         }
 
-        btnreturn.setOnClickListener{
+        pagesRecyclerView = findViewById<RecyclerView>(R.id.recycler2).apply { // ここでIDを修正
+            pagesRecyclerViewComponent = EndPagesRecyclerViewComponent(endpagesList, context)
+            setHasFixedSize(true)
+            layoutManager = pagesRecyclerViewComponent.viewManager
+            adapter = pagesRecyclerViewComponent.viewAdapter // Adapterを設定
+        }
+
+        btnreturn.setOnClickListener {
             finish()
         }
+
     }
 }
 

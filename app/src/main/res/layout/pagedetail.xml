@@ -105,7 +105,7 @@
     <Button
         android:id="@+id/datailbtnreturn"
         android:layout_width="150dp"
-        android:layout_height="85dp"
+        android:layout_height="75dp"
         android:text="戻る"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -114,7 +114,7 @@
     <Button
         android:id="@+id/btnupdate"
         android:layout_width="150dp"
-        android:layout_height="85dp"
+        android:layout_height="75dp"
         android:text="更新"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

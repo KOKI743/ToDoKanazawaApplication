@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 
@@ -55,21 +56,27 @@ class MainActivity : AppCompatActivity() {
                 }
                 adapter.notifyDataSetChanged() // UIを更新
                 adapter.resetCheckedItems() // チェックボックスの状態をリセット
+            }else{
+                Toast.makeText(this, "削除するタスクをチェックしてください", Toast.LENGTH_SHORT).show()
             }
 
         }
 
         // ボタンがクリックされたときにチェックされたアイテムのIDを取得
         val btncomp: Button = findViewById(R.id.btncomp)
-        btndelete.setOnClickListener {
+        btncomp.setOnClickListener {
             val checkedIds = adapter.getCheckedItemIds()
             Log.d("MainActivity", "Checked IDs: $checkedIds")
 
-            val intent = Intent(this, AddTodoActivity::class.java)
+            val intent = Intent(this, CompleteTodoActivity::class.java)
+            intent.putExtra("checkedIds", checkedIds.toIntArray())       // タスクのタイトルを渡す
             startActivity(intent)
 
-        }
 
+//            adapter.notifyDataSetChanged() // UIを更新
+//            adapter.resetCheckedItems() // チェックボックスの状態をリセット
+
+        }
     }
 
     override fun onResume() {

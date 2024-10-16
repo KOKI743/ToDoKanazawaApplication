@@ -16,7 +16,7 @@ class ShowDetailActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.pagedetailactivity)
+        setContentView(R.layout.pagedetail)
 
         // ボタンの取得とクリックリスナーの設定
         val detailReturn: Button = findViewById(R.id.datailbtnreturn)

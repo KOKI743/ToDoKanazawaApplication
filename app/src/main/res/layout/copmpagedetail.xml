@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="タスク追加"
+        android:text="タスク詳細"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
         android:id="@+id/textViewNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="タスク名入力"
+        android:text="タスク名"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/textViewTitle"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
 
     <!-- Name 入力フィールド -->
     <EditText
-        android:id="@+id/editTextName"
+        android:id="@+id/page_detail_title2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -52,14 +52,14 @@
         android:layout_height="wrap_content"
         android:text="日にち"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/editTextName"
+        app:layout_constraintTop_toBottomOf="@+id/page_detail_title2"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp" />
 
     <!-- Date 入力フィールド -->
     <EditText
-        android:id="@+id/editTextDate"
+        android:id="@+id/page_detail_updated_at2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -80,20 +80,21 @@
         android:layout_height="wrap_content"
         android:text="タスク詳細"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/editTextDate"
+        app:layout_constraintTop_toBottomOf="@+id/page_detail_updated_at2"
+
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp" />
 
     <!-- Content 入力フィールド -->
     <EditText
-        android:id="@+id/editTextContent"
+        android:id="@+id/page_detail_fragment_host2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:hint="タスク詳細入力"
+        android:hint="詳細入力"
         android:inputType="textMultiLine"
         android:minHeight="48dp"
         android:textSize="24sp"
@@ -102,17 +103,8 @@
         app:layout_constraintTop_toBottomOf="@id/textViewContentLabel" />
 
     <Button
-        android:id="@+id/addbtnOK"
-        android:layout_width="125dp"
-        android:layout_height="75dp"
-        android:text="保存"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/addbtnreturn"
-        android:layout_width="125dp"
+        android:id="@+id/datailbtnreturn"
+        android:layout_width="150dp"
         android:layout_height="75dp"
         android:text="戻る"
         android:textSize="20sp"

@@ -23,6 +23,8 @@
         </activity>
         <activity android:name=".ShowDetailActivity" />
         <activity android:name=".AddTodoActivity" />
+        <activity android:name=".CompleteTodoActivity" />
+        <activity android:name=".CompDetailActivity" />
 
     </application>
 
