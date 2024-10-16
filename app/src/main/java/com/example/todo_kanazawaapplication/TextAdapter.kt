@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,12 +16,20 @@ class PagesRecyclerViewComponent(data: ArrayList<Page>, context: Context) {
     val viewManager: LinearLayoutManager = LinearLayoutManager(context)
     val viewAdapter: MyAdapter = MyAdapter(data)
 
-    class MyAdapter(private val data: ArrayList<Page>) :
-        RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+
+    class MyAdapter(private val data: ArrayList<Page>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+
+        // チェックボックスの状態を保存するマップ
+        private val checkedItems: MutableMap<Int, Boolean> = mutableMapOf()
+
+
         class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
             val title: TextView = itemView.findViewById(R.id.checkBox)
             val deadline: TextView = itemView.findViewById(R.id.deadlineText)
             val button: Button = itemView.findViewById(R.id.btntododetail) // ボタンをここで取得
+
+            val checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -47,7 +56,30 @@ class PagesRecyclerViewComponent(data: ArrayList<Page>, context: Context) {
                 }
                 holder.itemView.context.startActivity(intent)
             }
+
+
+            // チェックボックスの状態を設定
+            holder.checkBox.setOnCheckedChangeListener(null) // リスナーを解除
+            holder.checkBox.isChecked = checkedItems[taskid] ?: false // 状態を適用
+
+            // チェックボックスの状態変更を監視して保存
+            holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
+                checkedItems[taskid] = isChecked
+            }
+
         }
+        // チェックが入っているアイテムのIDを取得する
+        fun getCheckedItemIds(): List<Int> {
+            return checkedItems.filter { it.value }.keys.toList()
+        }
+
+        // 削除後にチェックボックスの状態をリセット
+        fun resetCheckedItems() {
+            checkedItems.clear()
+            notifyDataSetChanged() // UIを更新
+        }
+
     }
+
 }
 

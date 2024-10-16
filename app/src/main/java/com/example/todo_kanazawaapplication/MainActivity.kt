@@ -29,14 +29,47 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val btnadd = findViewById<Button>(R.id.btnadd)
-        btnadd.setOnClickListener {
+        val btnAdd = findViewById<Button>(R.id.btnAdd)
+        btnAdd.setOnClickListener {
             Log.d("MainActivity", "Add button clicked")  // ここでクリックイベントがトリガーされたことを確認
             val intent = Intent(this, AddTodoActivity::class.java)
             startActivity(intent)
 
 //            adapter.notifyDataSetChanged()  // データ全体の変更を通知
         }
+
+
+        // ボタンがクリックされたときにチェックされたアイテムのIDを取得
+        val btndelete: Button = findViewById(R.id.btnDelete)
+        btndelete.setOnClickListener {
+            val checkedIds = adapter.getCheckedItemIds()
+            Log.d("MainActivity", "Checked IDs: $checkedIds")
+
+            if (checkedIds.isNotEmpty()) {
+                val iterator = pagesList.iterator()  // イテレータを使用して安全にリストから削除
+                while (iterator.hasNext()) {
+                    val page = iterator.next()
+                    if (checkedIds.contains(page.id)) {
+                        iterator.remove()  // チェックされたIDに一致するアイテムを削除
+                    }
+                }
+                adapter.notifyDataSetChanged() // UIを更新
+                adapter.resetCheckedItems() // チェックボックスの状態をリセット
+            }
+
+        }
+
+        // ボタンがクリックされたときにチェックされたアイテムのIDを取得
+        val btncomp: Button = findViewById(R.id.btncomp)
+        btndelete.setOnClickListener {
+            val checkedIds = adapter.getCheckedItemIds()
+            Log.d("MainActivity", "Checked IDs: $checkedIds")
+
+            val intent = Intent(this, AddTodoActivity::class.java)
+            startActivity(intent)
+
+        }
+
     }
 
     override fun onResume() {
