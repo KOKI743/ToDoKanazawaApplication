@@ -48,14 +48,14 @@
     <!-- Date ラベル -->
     <TextView
         android:id="@+id/textViewDateLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="日にち"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@+id/page_detail_title"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="50dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp" />
+        android:text="期限"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/page_detail_title" />
 
     <!-- Date 入力フィールド -->
     <EditText

@@ -50,12 +50,12 @@
         android:id="@+id/textViewDateLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="日にち"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@+id/page_detail_title2"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp" />
+        android:text="期限"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/page_detail_title2" />
 
     <!-- Date 入力フィールド -->
     <EditText
@@ -104,7 +104,7 @@
 
     <Button
         android:id="@+id/datailbtnreturn"
-        android:layout_width="150dp"
+        android:layout_width="125dp"
         android:layout_height="75dp"
         android:text="戻る"
         android:textSize="20sp"

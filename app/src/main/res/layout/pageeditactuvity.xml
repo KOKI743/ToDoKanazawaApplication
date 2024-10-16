@@ -39,14 +39,12 @@
 
     <Button
         android:id="@+id/btncomp"
-        android:layout_width="125dp"
+        android:layout_width="135dp"
         android:layout_height="75dp"
-        android:layout_marginEnd="16dp"
-        android:text="完了"
+        android:text="完了済みへ移動"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnAdd"
-        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toEndOf="@+id/btnDelete"
         app:layout_constraintTop_toBottomOf="@+id/recycler"
         app:layout_constraintVertical_bias="1.0" />

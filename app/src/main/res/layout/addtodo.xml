@@ -50,12 +50,12 @@
         android:id="@+id/textViewDateLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="日にち"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/editTextName"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp" />
+        android:text="期限 (YYYY-MM-DD)"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextName" />
 
     <!-- Date 入力フィールド -->
     <EditText

@@ -23,5 +23,5 @@ public val pagesList: ArrayList<Page> = arrayListOf(
 public val endpagesList: ArrayList<Page> = arrayListOf(
     Page(1, "ENDTODO1", "あ", LocalDate.of(2024, 10, 15)),
     Page(2, "ENDTODO2", "は", LocalDate.of(2024, 10, 30)),
-    Page(3, "ENDDOTO3", "よ", LocalDate.of(2024, 11, 15))
+    Page(3, "ENDDOTO3", "よよよ", LocalDate.of(2024, 11, 15))
 )
