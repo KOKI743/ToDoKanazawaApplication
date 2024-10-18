@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="タスク追加"
+        android:text="@string/add_task"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
         android:id="@+id/textViewNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="タスク名入力"
+        android:text="@string/enter_task_name"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/textViewTitle"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,12 +38,18 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:hint="タスク名入力"
+        android:autofillHints="タスク名"
+        android:background="@android:color/white"
+        android:hint="@string/enter_detail2"
+        android:inputType="text"
         android:minHeight="48dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="#78909C"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewNameLabel" />
+        app:layout_constraintTop_toBottomOf="@id/textViewNameLabel"
+        tools:ignore="VisualLintTextFieldSize" />
 
     <!-- Date ラベル -->
     <TextView
@@ -52,33 +58,38 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="期限 (YYYY-MM-DD)"
+        android:text="@string/enter_date"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTextName" />
 
     <!-- Date 入力フィールド -->
+
+    <!-- Content ラベル -->
+
     <EditText
         android:id="@+id/editTextDate"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:hint="日にち入力"
+        android:autofillHints="0000-00-00"
+        android:background="@android:color/white"
+        android:hint="@string/enter_date2"
         android:inputType="date"
         android:minHeight="48dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="#78909C"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewDateLabel" />
+        app:layout_constraintTop_toBottomOf="@id/textViewDateLabel"
+        tools:ignore="VisualLintTextFieldSize" />
 
-    <!-- Content ラベル -->
     <TextView
         android:id="@+id/textViewContentLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="タスク詳細"
+        android:text="@string/enter_detail"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/editTextDate"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,30 +104,47 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:hint="タスク詳細入力"
+        android:autofillHints="taskDetail"
+        android:background="@android:color/white"
+        android:hint="@string/enter_task_name2"
         android:inputType="textMultiLine"
         android:minHeight="48dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="#78909C"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewContentLabel" />
+        app:layout_constraintTop_toBottomOf="@id/textViewContentLabel"
+        tools:ignore="VisualLintTextFieldSize" />
 
     <Button
-        android:id="@+id/addbtnOK"
+        android:id="@+id/addBtnOK"
         android:layout_width="125dp"
         android:layout_height="75dp"
-        android:text="保存"
-        android:textSize="20sp"
+        android:text="@string/save"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/addbtnreturn"
+        android:id="@+id/addBtnReturn"
         android:layout_width="125dp"
         android:layout_height="75dp"
-        android:text="戻る"
+        android:text="@string/return_text"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/addBtnCalender"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/calender_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/editTextDate"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDateLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

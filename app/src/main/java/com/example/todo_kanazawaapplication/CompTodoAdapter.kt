@@ -19,13 +19,13 @@ class EndPagesRecyclerViewComponent(data: ArrayList<Page>, context: Context) {
     class MyAdapter(private val data: ArrayList<Page>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
         class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-            val title: TextView = itemView.findViewById(R.id.checkBox)
+            val title: TextView = itemView.findViewById(R.id.textView)
             val deadline: TextView = itemView.findViewById(R.id.deadlineText)
-            val button: Button = itemView.findViewById(R.id.btntododetail) // ボタンをここで取得
+            val button: Button = itemView.findViewById(R.id.btnToDoDetail)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_text, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.end_item, parent, false)
             return MyViewHolder(view)
         }
 
@@ -36,21 +36,18 @@ class EndPagesRecyclerViewComponent(data: ArrayList<Page>, context: Context) {
             val page = data[position]
             holder.title.text = page.title
             holder.deadline.text = page.deadline.toString()
-            val taskid = page.id
+            val taskId = page.id
 
 
             // ボタンのクリックリスナーを設定
             holder.button.setOnClickListener {
                 // ボタンがクリックされたときの処理
                 val intent = Intent(holder.itemView.context, CompDetailActivity::class.java).apply {
-                    Log.d("MyAdapter", "Button clicked for taskid: $taskid")
-                    putExtra("taskid", taskid)       // タスクのタイトルを渡す
+                    Log.d("MyAdapter", "Button clicked for taskId: $taskId") // ログで確認
+                    putExtra("taskId", taskId)       // タスクのIDを渡す
                 }
                 holder.itemView.context.startActivity(intent)
             }
-
-
-
 
         }
 

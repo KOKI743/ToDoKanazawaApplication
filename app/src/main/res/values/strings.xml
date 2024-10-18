@@ -1,4 +1,32 @@
 <resources>
     <string name="app_name">ToDo_KanazawaApplication</string>
-    <string name="page_detail_updated_at_label">2024/10/10</string>
+    <string name="error_task_name">無効なタスクID</string>
+
+    <string name="add_task">タスク追加</string>
+    <string name="task_detail">タスク詳細</string>
+    <string name="not_end_title">未完了タスク</string>
+    <string name="end_title">完了済タスク</string>
+    <string name="move_end_page">完了済みへ移動</string>
+    <string name="delete">削除</string>
+
+    <string name="enter_task_name">タスク名入力</string>
+    <string name="enter_task_name2">ここに入力</string>
+    <string name="enter_date">期限 (YYYY-MM-DD)</string>
+    <string name="enter_date2">YYYY-MM-DDで入力</string>
+
+
+    <string name="enter_detail">タスク詳細</string>
+    <string name="enter_detail2">詳細を入力</string>
+
+    <string name="save">保存</string>
+    <string name="return_text">戻る</string>
+
+    <string name="task_name">タスク名</string>
+    <string name="detail_text">詳細</string>
+
+    <string name="date_text">YYYY-MM-DD</string>
+    <string name="calender_text">日付入力</string>
+
+
+
 </resources>

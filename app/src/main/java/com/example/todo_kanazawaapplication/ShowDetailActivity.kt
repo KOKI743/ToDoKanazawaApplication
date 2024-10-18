@@ -1,6 +1,5 @@
 package com.example.todo_kanazawaapplication
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -13,52 +12,52 @@ import java.time.format.DateTimeParseException
 
 class ShowDetailActivity : AppCompatActivity() {
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.pagedetail)
+        setContentView(R.layout.page_detail) //page_detail.xmlを表示
 
-        // ボタンの取得とクリックリスナーの設定
-        val detailReturn: Button = findViewById(R.id.datailbtnreturn)
-
-        val detail_title: TextView = findViewById(R.id.page_detail_title)
-        val detail_date: TextView = findViewById(R.id.page_detail_updated_at)
-        val detail_detail: TextView = findViewById(R.id.page_detail_fragment_host)
-        val updateButton: Button = findViewById(R.id.btnupdate)
+        // page_detail.xml内の要素の取得
+        val detailReturn: Button = findViewById(R.id.detailBtnReturn)
+        val detailTitle: TextView = findViewById(R.id.pageDetailTitle)
+        val detailDate: TextView = findViewById(R.id.pageDetailUpdatedAt)
+        val detailDetail: TextView = findViewById(R.id.pageDetailFragmentHost)
+        val updateButton: Button = findViewById(R.id.btnUpdate)
 
         val intent = intent // Intentを取得
-        val todoid: String? = intent.getStringExtra("taskid") // "todoid"というキーでデータを取得
+        val todoId: String? = intent.getStringExtra("taskId") // "todoId"というキーで、渡されたデータを取得
 
-        // nullチェックをして、todoidに対応するページをリストから一度だけ取得
-        val taskIdInt = todoid?.toIntOrNull() // nullチェックを行い、Intに変換
+        // nullチェックをして、todoIdに対応するページをリストから一度だけ取得
+        val taskIdInt = todoId?.toIntOrNull() // nullチェックを行い、Intに変換
 
         if (taskIdInt != null) {
             // taskIdIntを使用して、対応するPageを取得
             val page = pagesList.find { it.id == taskIdInt }
             if (page != null) {
-                // 取得したPageの情報を表示
-                detail_title.text = page.title
-                detail_date.text = page.deadline.toString()
-                detail_detail.text = page.content
+                // 取得したPageの情報を格納、表示
+                detailTitle.text = page.title
+                detailDate.text = page.deadline.toString()
+                detailDetail.text = page.content
             } else {
-                detail_title.text = "該当するタスクが見つかりません"
+                detailTitle.text = "該当するタスクが見つかりません"
             }
         } else {
-            Log.e("ShowDetailActivity", "Received taskid is not a valid number.")
-            detail_title.text = "無効なタスクID"
+            //渡された要素が空のときに表示
+            Log.e("ShowDetailActivity", "Received taskId is not a valid number.")
+            detailTitle.setText(R.string.error_task_name)
         }
 
         // 更新ボタンのクリックリスナー
         updateButton.setOnClickListener {
             if (taskIdInt != null) {
-                val updatedTitle = detail_title.text.toString() // 更新したタイトルを取得
-                val updatedContent = detail_detail.text.toString() // 更新した内容を取得
-                val updatedDeadline = detail_date.text.toString() // 更新した締切日を取得
+                val updatedTitle = detailTitle.text.toString() // 入力したタイトルを取得
+                val updatedContent = detailDetail.text.toString() // 入力した内容を取得
+                val updatedDeadline = detailDate.text.toString() // 入力した締切日を取得
 
+                //taskDateがLocalDate型に変換可能かの判定
                 val taskDate: LocalDate? = try {
                     LocalDate.parse(updatedDeadline, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                 } catch (e: DateTimeParseException) {
-                    Log.e("formatchenge","Localtimeerror")
+                    Log.e("formatChange","LocalTimError")
                     null
                 }
 
@@ -73,6 +72,7 @@ class ShowDetailActivity : AppCompatActivity() {
                     )
                     finish() // 画面を閉じる
                 }else{
+                    //要素が空かdateが適していないときに表示
                     Toast.makeText(this, "追加に失敗しました。\nもう一度確かめてみてください。", Toast.LENGTH_SHORT).show()
                 }
             }

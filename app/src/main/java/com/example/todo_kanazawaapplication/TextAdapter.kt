@@ -26,7 +26,7 @@ class PagesRecyclerViewComponent(data: ArrayList<Page>, context: Context) {
 
             val title: TextView = itemView.findViewById(R.id.checkBox)
             val deadline: TextView = itemView.findViewById(R.id.deadlineText)
-            val button: Button = itemView.findViewById(R.id.btntododetail) // ボタンをここで取得
+            val button: Button = itemView.findViewById(R.id.btnToDoDetail)
 
             val checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
         }
@@ -43,15 +43,15 @@ class PagesRecyclerViewComponent(data: ArrayList<Page>, context: Context) {
             val page = data[position]
             holder.title.text = page.title
             holder.deadline.text = page.deadline.toString()
-            val taskid = page.id
+            val taskId = page.id
 
 
             // ボタンのクリックリスナーを設定
             holder.button.setOnClickListener {
                 // ボタンがクリックされたときの処理
                 val intent = Intent(holder.itemView.context, ShowDetailActivity::class.java).apply {
-                    Log.d("MyAdapter", "Button clicked for taskid: $taskid")
-                    putExtra("taskid", taskid.toString())       // タスクのタイトルを渡す
+                    Log.d("MyAdapter", "Button clicked for taskId: $taskId")
+                    putExtra("taskId", taskId.toString())       // タスクIDを渡す
                 }
                 holder.itemView.context.startActivity(intent)
             }
@@ -59,11 +59,11 @@ class PagesRecyclerViewComponent(data: ArrayList<Page>, context: Context) {
 
             // チェックボックスの状態を設定
             holder.checkBox.setOnCheckedChangeListener(null) // リスナーを解除
-            holder.checkBox.isChecked = checkedItems[taskid] ?: false // 状態を適用
+            holder.checkBox.isChecked = checkedItems[taskId] ?: false // 状態を適用
 
             // チェックボックスの状態変更を監視して保存
             holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
-                checkedItems[taskid] = isChecked
+                checkedItems[taskId] = isChecked
             }
 
         }

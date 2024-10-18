@@ -11,59 +11,68 @@ import java.time.format.DateTimeParseException
 
 class CompleteTodoActivity : AppCompatActivity() {
 
+    //完了済みリスト表示RecyclerViewの設定
     private lateinit var pagesRecyclerView: RecyclerView
     private lateinit var pagesRecyclerViewComponent: EndPagesRecyclerViewComponent
-    //lateinit var adapter: PagesRecyclerViewComponent.MyAdapter  // Adapterを設定
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.endtodo)
+        setContentView(R.layout.end_todo) //endtodo.xmlを表示
 
-        // EditText の変数は正しく型指定
-        val btnreturn: Button = findViewById(R.id.btnreturn)
+        // endtodo.xml内の要素の取得
+        val btnReturn: Button = findViewById(R.id.btnReturn)
+
+        //渡された要素の受け取り
         val intent = intent
         val checkedIds = intent.getIntArrayExtra("checkedIds")
 
+        //要素があるならendPagesListに指定のIDのpagesListの要素を格納
         if (checkedIds != null) {
-            val iterator = pagesList.iterator()  // イテレータを使用して安全にリストから削除
+            val iterator = pagesList.iterator()  // イテレータを使用
             while (iterator.hasNext()) {
                 val page = iterator.next()
                 if (checkedIds.contains(page.id)) {
 
-                    val taskTitletext = page.title
-                    val taskContenttext = page.content
-                    val taskdateString = page.deadline.toString()
+                    //指定のIDのpagesListの要素の取得
+                    val taskTitleText = page.title
+                    val taskContentText = page.content
+                    val taskDateString = page.deadline.toString()
 
+                    //taskDateがLocalDate型に変換可能かの判定
                     val taskDate: LocalDate? = try {
-                        LocalDate.parse(taskdateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                        LocalDate.parse(taskDateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                     } catch (e: DateTimeParseException) {
-                        Log.e("formatchenge", "Localtimeerror")
+                        Log.e("formatChange", "LocalTimeError")
                         null
                     }
 
-                    if (taskTitletext.isNotEmpty() && taskContenttext.isNotEmpty() && taskDate != null) {
+                    //endPagesListに格納
+                    if (taskTitleText.isNotEmpty() && taskContentText.isNotEmpty() && taskDate != null) {
                         val newTask = Page(
                             id = pagesList.size + 1,
-                            title = taskTitletext,
-                            content = taskContenttext,
+                            title = taskTitleText,
+                            content = taskContentText,
                             deadline = taskDate
                         )
-                        endpagesList.add(newTask)
+                        endPagesList.add(newTask)
 
-                        iterator.remove()  // チェックされたIDに一致するアイテムを削除
+                        // チェックされたIDに一致するpagesListの要素を削除
+                        iterator.remove()
                     }
                 }
             }
         }
 
+        //EndPagesRecyclerViewの設定
         pagesRecyclerView = findViewById<RecyclerView>(R.id.recycler2).apply { // ここでIDを修正
-            pagesRecyclerViewComponent = EndPagesRecyclerViewComponent(endpagesList, context)
+            pagesRecyclerViewComponent = EndPagesRecyclerViewComponent(endPagesList, context)
             setHasFixedSize(true)
             layoutManager = pagesRecyclerViewComponent.viewManager
             adapter = pagesRecyclerViewComponent.viewAdapter // Adapterを設定
         }
 
-        btnreturn.setOnClickListener {
+        // 現在のアクティビティを閉じる
+        btnReturn.setOnClickListener {
             finish()
         }
 

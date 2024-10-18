@@ -1,6 +1,5 @@
 package com.example.todo_kanazawaapplication
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -9,43 +8,43 @@ import androidx.appcompat.app.AppCompatActivity
 
 class CompDetailActivity : AppCompatActivity() {
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.copmpagedetail)
+        setContentView(R.layout.comp_page_detail) //comp_page_detail.xmlを表示
 
-        // ボタンの取得とクリックリスナーの設定
-        val detailReturn: Button = findViewById(R.id.datailbtnreturn)
+        // comp_page_detail.xmlの要素の取得
+        val detailReturn: Button = findViewById(R.id.detailBtnReturn)
+        val detailTitle: TextView = findViewById(R.id.pageDetailTitle2)
+        val detailDate: TextView = findViewById(R.id.pageDetailUpdatedAt2)
+        val detailDetail: TextView = findViewById(R.id.pageDetailFragmentHost2)
 
-        val detail_title: TextView = findViewById(R.id.page_detail_title2)
-        val detail_date: TextView = findViewById(R.id.page_detail_updated_at2)
-        val detail_detail: TextView = findViewById(R.id.page_detail_fragment_host2)
-
+        //渡された要素の受け取り
         val intent = intent // Intentを取得
-        //val todoid: String? = intent.getStringExtra("taskid") // "todoid"というキーでデータを取得
-        // CompDetailActivityでの取得方法
-        val taskIdInt: Int = intent.getIntExtra("taskid", -1) // デフォルト値として-1を設定
+        // 渡される値がない場合のエラー値として-1を設定
+        val taskIdInt: Int = intent.getIntExtra("taskId", -1)
 
-        Log.d("MyAdapter2", "Button clicked for taskid: $taskIdInt")
+        Log.d("MyAdapter2", "Button clicked for taskId: $taskIdInt") // ログで確認
 
-        // nullチェックをして、todoidに対応するページをリストから一度だけ取得
-        // taskIdInt = todoid?.toIntOrNull() // nullチェックを行い、Intに変換
 
-        if (taskIdInt != null) {
-            // taskIdIntを使用して、対応するPageを取得
-            val page = endpagesList.find { it.id == taskIdInt }
+        //渡された値に対応するendPagesListの要素を表示
+        if (taskIdInt != -1) {
+            // taskIdIntを使用して、endPagesListの対応するPageを取得
+            val page = endPagesList.find { it.id == taskIdInt }
             if (page != null) {
-                // 取得したPageの情報を表示
-                detail_title.text = page.title
-                detail_date.text = page.deadline.toString()
-                detail_detail.text = page.content
+                // 取得したPageの情報を格納
+                detailTitle.text = page.title
+                detailDate.text = page.deadline.toString()
+                detailDetail.text = page.content
             } else {
-                detail_title.text = "該当するタスクが見つかりません"
+                //idが適していないときに表示
+                detailTitle.text = "該当するタスクが見つかりません"
             }
         } else {
-            Log.e("ShowDetailActivity", "Received taskid is not a valid number.")
-            detail_title.text = "無効なタスクID"
+            //渡された値が適していないときに表示
+            Log.e("ShowDetailActivity", "Received taskId is not a valid number.") // ログで確認
+            detailTitle.setText(R.string.error_task_name)
         }
+
         detailReturn.setOnClickListener {
             finish() // 現在のアクティビティを閉じる
         }

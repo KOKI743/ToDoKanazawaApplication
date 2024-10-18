@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="未完了タスク"
+        android:text="@string/not_end_title"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,28 +32,30 @@
         android:id="@+id/btnAdd"
         android:layout_width="125dp"
         android:layout_height="75dp"
-        android:text="タスク追加"
-        android:textSize="20dp"
+        android:text="@string/add_task"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="TextSizeCheck" />
 
     <Button
-        android:id="@+id/btncomp"
+        android:id="@+id/btnComp"
         android:layout_width="135dp"
         android:layout_height="75dp"
-        android:text="完了済みへ移動"
+        android:text="@string/move_end_page"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnAdd"
         app:layout_constraintStart_toEndOf="@+id/btnDelete"
         app:layout_constraintTop_toBottomOf="@+id/recycler"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="TextSizeCheck" />
 
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="125dp"
         android:layout_height="75dp"
-        android:text="削除"
+        android:text="@string/delete"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
