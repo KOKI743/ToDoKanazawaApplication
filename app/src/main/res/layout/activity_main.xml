@@ -20,13 +20,16 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="0dp"
-        android:layout_height="570dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:clickable="true"
         android:focusable="true"
+        app:layout_constraintBottom_toTopOf="@+id/btnComp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle2" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle2"
+        app:layout_constraintVertical_bias="0.096" />
 
     <Button
         android:id="@+id/btnAdd"
@@ -45,10 +48,8 @@
         android:text="@string/move_end_page"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
-        app:layout_constraintStart_toEndOf="@+id/btnDelete"
-        app:layout_constraintTop_toBottomOf="@+id/recycler"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="TextSizeCheck" />
 
     <Button

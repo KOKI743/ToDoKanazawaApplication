@@ -10,7 +10,7 @@
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/task_detail"
         android:textSize="34sp"
         android:textStyle="bold"
@@ -23,12 +23,12 @@
         android:id="@+id/textViewNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:text="@string/task_name"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp" />
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
 
     <!-- Name 入力フィールド -->
     <EditText
@@ -36,7 +36,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:autofillHints="タスク名"
         android:hint="@string/enter_task_name"
@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/enter_date"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +67,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:autofillHints="0000-00-00"
         android:hint="@string/enter_date2"
@@ -83,15 +83,15 @@
     <!-- Content ラベル -->
     <TextView
         android:id="@+id/textViewContentLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="82dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/enter_detail"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@+id/pageDetailUpdatedAt2"
 
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp" />
+        app:layout_constraintTop_toBottomOf="@+id/pageDetailUpdatedAt2" />
 
     <!-- Content 入力フィールド -->
     <EditText
@@ -99,7 +99,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:autofillHints="taskDetail"
         android:hint="@string/enter_detail2"
@@ -115,7 +115,7 @@
     <Button
         android:id="@+id/detailBtnReturn"
         android:layout_width="125dp"
-        android:layout_height="75dp"
+        android:layout_height="65dp"
         android:text="@string/return_text"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
