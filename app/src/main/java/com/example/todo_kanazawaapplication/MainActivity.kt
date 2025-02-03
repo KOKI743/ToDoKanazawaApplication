@@ -15,69 +15,73 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pagesRecyclerViewComponent: PagesRecyclerViewComponent
     private lateinit var adapter: PagesRecyclerViewComponent.MyAdapter  // Adapterを設定
 
+    // previousListSizeを初期化（RecyclerViewの項目数を追跡するための変数）
+    private var previousListSize = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main) //画面の呼び出し
+        setContentView(R.layout.activity_main)
 
+        pagesRecyclerViewComponent = PagesRecyclerViewComponent(pagesList, this)
+        adapter = pagesRecyclerViewComponent.viewAdapter
         pagesRecyclerView = findViewById<RecyclerView>(R.id.recycler).apply {
-            pagesRecyclerViewComponent = PagesRecyclerViewComponent(pagesList, context)
             setHasFixedSize(true)
             layoutManager = pagesRecyclerViewComponent.viewManager
-            adapter = pagesRecyclerViewComponent.viewAdapter // Adapterを設定
+            adapter = this@MainActivity.adapter
         }
 
-        // ボタンがクリックされたときに別画面に遷移
+        // previousListSizeの初期値を設定
+        previousListSize = pagesList.size
+
+
         val btnAdd = findViewById<Button>(R.id.btnAdd)
         btnAdd.setOnClickListener {
-            Log.d("MainActivity", "Add button clicked")  // ログで確認
+            Log.d("MainActivity", "Add button clicked")
             val intent = Intent(this, AddTodoActivity::class.java)
             startActivity(intent)
         }
 
-
-        // ボタンがクリックされたときにチェックされたアイテムのIDを取得し削除
         val btnDelete: Button = findViewById(R.id.btnDelete)
         btnDelete.setOnClickListener {
-            val checkedIds = adapter.getCheckedItemIds() //adapterクラスの関数
-            Log.d("MainActivity", "Checked IDs: $checkedIds") // ログで確認
+            val checkedIds = adapter.getCheckedItemIds()
+            Log.d("MainActivity", "Checked IDs: $checkedIds")
 
             if (checkedIds.isNotEmpty()) {
-                val iterator = pagesList.iterator()  // イテレータを使用
+                val iterator = pagesList.iterator()
                 while (iterator.hasNext()) {
                     val page = iterator.next()
                     if (checkedIds.contains(page.id)) {
-                        iterator.remove()  // チェックされたIDに一致するアイテムを削除
+                        iterator.remove()
                     }
                 }
-                ////警告があるが代替案が不明
-                adapter.notifyDataSetChanged() // UIを更新
-                adapter.resetCheckedItems() // チェックボックスの状態をリセット
-            }else{
-                //チェックされていないときに表示
+                adapter.notifyItemRangeRemoved(0, checkedIds.size)
+                adapter.resetCheckedItems()
+            } else {
                 Toast.makeText(this, "削除するタスクをチェックしてください", Toast.LENGTH_SHORT).show()
             }
-
         }
 
-        // ボタンがクリックされたときにチェックされたアイテムのIDを取得し完了
         val btnComp: Button = findViewById(R.id.btnComp)
         btnComp.setOnClickListener {
             val checkedIds = adapter.getCheckedItemIds()
-            Log.d("MainActivity", "Checked IDs: $checkedIds") // ログで確認
-
+            Log.d("MainActivity", "Checked IDs: $checkedIds")
             val intent = Intent(this, CompleteTodoActivity::class.java)
-            intent.putExtra("checkedIds", checkedIds.toIntArray())       // タスクのIDを渡す
-            startActivity(intent) //別画面にデータを渡し遷移
-
+            intent.putExtra("checkedIds", checkedIds.toIntArray())
+            startActivity(intent)
         }
     }
 
-    //画面更新用
+
     override fun onResume() {
         super.onResume()
-        // データを再取得してRecyclerViewを更新
-        adapter = pagesRecyclerViewComponent.viewAdapter // Adapterを設定
-        adapter.notifyDataSetChanged()
-    }
 
+        // RecyclerViewの更新処理
+        val currentListSize = pagesList.size
+        if (currentListSize > previousListSize) {
+            adapter.notifyItemRangeInserted(previousListSize, currentListSize - previousListSize)
+        } else if (currentListSize < previousListSize) {
+            adapter.notifyItemRangeRemoved(currentListSize, previousListSize - currentListSize)
+        }
+        previousListSize = currentListSize // 前回のリストサイズを更新
+    }
 }

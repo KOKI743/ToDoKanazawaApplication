@@ -21,7 +21,7 @@ class EndPagesRecyclerViewComponent(data: ArrayList<Page>, context: Context) {
 
             val title: TextView = itemView.findViewById(R.id.textView)
             val deadline: TextView = itemView.findViewById(R.id.deadlineText)
-            val button: Button = itemView.findViewById(R.id.btnToDoDetail)
+            val detail: Button = itemView.findViewById(R.id.btnToDoDetail)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -40,7 +40,7 @@ class EndPagesRecyclerViewComponent(data: ArrayList<Page>, context: Context) {
 
 
             // ボタンのクリックリスナーを設定
-            holder.button.setOnClickListener {
+            holder.detail.setOnClickListener {
                 // ボタンがクリックされたときの処理
                 val intent = Intent(holder.itemView.context, CompDetailActivity::class.java).apply {
                     Log.d("MyAdapter", "Button clicked for taskId: $taskId") // ログで確認

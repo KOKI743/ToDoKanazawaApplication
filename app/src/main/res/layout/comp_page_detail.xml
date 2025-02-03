@@ -88,7 +88,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/enter_detail"
-
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pageDetailUpdatedAt2" />
@@ -116,8 +115,10 @@
         android:id="@+id/detailBtnReturn"
         android:layout_width="125dp"
         android:layout_height="65dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/return_text"
         android:textSize="20sp"
+        app:icon="@drawable/ic_action_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -29,7 +29,7 @@ class CompDetailActivity : AppCompatActivity() {
         //渡された値に対応するendPagesListの要素を表示
         if (taskIdInt != -1) {
             // taskIdIntを使用して、endPagesListの対応するPageを取得
-            val page = endPagesList.find { it.id == taskIdInt }
+            val page: Page? = endPagesList.find { it.id == taskIdInt }
             if (page != null) {
                 // 取得したPageの情報を格納
                 detailTitle.text = page.title

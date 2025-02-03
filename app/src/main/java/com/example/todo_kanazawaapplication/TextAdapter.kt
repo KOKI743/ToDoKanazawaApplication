@@ -12,11 +12,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class PagesRecyclerViewComponent(data: ArrayList<Page>, context: Context) {
+class PagesRecyclerViewComponent(data: MutableList<Page>, context: Context) {
     val viewManager: LinearLayoutManager = LinearLayoutManager(context)
     val viewAdapter: MyAdapter = MyAdapter(data)
 
-    class MyAdapter(private val data: ArrayList<Page>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+    class MyAdapter(private val data: MutableList<Page>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
         // チェックボックスの状態を保存するマップ
         private val checkedItems: MutableMap<Int, Boolean> = mutableMapOf()
@@ -75,9 +75,8 @@ class PagesRecyclerViewComponent(data: ArrayList<Page>, context: Context) {
         // 削除後にチェックボックスの状態をリセット
         fun resetCheckedItems() {
             checkedItems.clear()
-            notifyDataSetChanged() // UIを更新
+            notifyItemRangeChanged(0, itemCount) // 全範囲を更新
         }
-
     }
 
 }

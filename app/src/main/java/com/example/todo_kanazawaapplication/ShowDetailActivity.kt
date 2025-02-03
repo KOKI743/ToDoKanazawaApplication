@@ -50,7 +50,7 @@ class ShowDetailActivity : AppCompatActivity() {
         updateButton.setOnClickListener {
             if (taskIdInt != null) {
                 val updatedTitle = detailTitle.text.toString() // 入力したタイトルを取得
-                val updatedContent = detailDetail.text.toString() // 入力した内容を取得
+                val updatedContent:String = detailDetail.text.toString() // 入力した内容を取得
                 val updatedDeadline = detailDate.text.toString() // 入力した締切日を取得
 
                 //taskDateがLocalDate型に変換可能かの判定
@@ -62,11 +62,11 @@ class ShowDetailActivity : AppCompatActivity() {
                 }
 
                 // IDを元に配列を更新する
-                val index = pagesList.indexOfFirst { it.id == taskIdInt }
+                val index: Int = pagesList.indexOfFirst { it.id == taskIdInt }
                 if (index != -1 && updatedTitle.isNotEmpty() && updatedContent.isNotEmpty() && taskDate != null) {
                     // ページの内容を更新
                     pagesList[index] = pagesList[index].copy(
-                        title = updatedTitle,
+                        title   = updatedTitle,
                         content = updatedContent,
                         deadline = taskDate // 文字列を LocalDate に変換
                     )

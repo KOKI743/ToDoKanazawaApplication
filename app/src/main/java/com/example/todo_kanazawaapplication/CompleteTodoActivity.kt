@@ -19,24 +19,32 @@ class CompleteTodoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.end_todo) //endtodo.xmlを表示
 
+        //EndPagesRecyclerViewの設定
+        pagesRecyclerView = findViewById<RecyclerView>(R.id.recycler2).apply { // ここでIDを修正
+            pagesRecyclerViewComponent = EndPagesRecyclerViewComponent(endPagesList, context)
+            setHasFixedSize(true)
+            layoutManager = pagesRecyclerViewComponent.viewManager
+            adapter = pagesRecyclerViewComponent.viewAdapter // Adapterを設定
+        }
+
         // endtodo.xml内の要素の取得
         val btnReturn: Button = findViewById(R.id.btnReturn)
 
         //渡された要素の受け取り
         val intent = intent
-        val checkedIds = intent.getIntArrayExtra("checkedIds")
+        val checkedIds: IntArray? = intent.getIntArrayExtra("checkedIds")
 
         //要素があるならendPagesListに指定のIDのpagesListの要素を格納
         if (checkedIds != null) {
-            val iterator = pagesList.iterator()  // イテレータを使用
+            val iterator: MutableIterator<Page> = pagesList.iterator()  // イテレータを使用
             while (iterator.hasNext()) {
-                val page = iterator.next()
+                val page: Page = iterator.next()
                 if (checkedIds.contains(page.id)) {
 
                     //指定のIDのpagesListの要素の取得
-                    val taskTitleText = page.title
-                    val taskContentText = page.content
-                    val taskDateString = page.deadline.toString()
+                    val taskTitleText:String = page.title
+                    val taskContentText:String = page.content
+                    val taskDateString:String = page.deadline.toString()
 
                     //taskDateがLocalDate型に変換可能かの判定
                     val taskDate: LocalDate? = try {
@@ -49,7 +57,7 @@ class CompleteTodoActivity : AppCompatActivity() {
                     //endPagesListに格納
                     if (taskTitleText.isNotEmpty() && taskContentText.isNotEmpty() && taskDate != null) {
                         val newTask = Page(
-                            id = pagesList.size + 1,
+                            id = endPagesList.size + 1,
                             title = taskTitleText,
                             content = taskContentText,
                             deadline = taskDate
@@ -63,13 +71,6 @@ class CompleteTodoActivity : AppCompatActivity() {
             }
         }
 
-        //EndPagesRecyclerViewの設定
-        pagesRecyclerView = findViewById<RecyclerView>(R.id.recycler2).apply { // ここでIDを修正
-            pagesRecyclerViewComponent = EndPagesRecyclerViewComponent(endPagesList, context)
-            setHasFixedSize(true)
-            layoutManager = pagesRecyclerViewComponent.viewManager
-            adapter = pagesRecyclerViewComponent.viewAdapter // Adapterを設定
-        }
 
         // 現在のアクティビティを閉じる
         btnReturn.setOnClickListener {
