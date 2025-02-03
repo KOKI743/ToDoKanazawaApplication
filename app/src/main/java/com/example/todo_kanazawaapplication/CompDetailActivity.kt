@@ -25,6 +25,8 @@ class CompDetailActivity : AppCompatActivity() {
 
         Log.d("MyAdapter2", "Button clicked for taskId: $taskIdInt") // ログで確認
 
+        Log.d("MyAdapter2", "Button clicked for taskId: $taskIdInt") // ログで確認
+
 
         //渡された値に対応するendPagesListの要素を表示
         if (taskIdInt != -1) {
