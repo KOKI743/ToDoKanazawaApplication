@@ -26,8 +26,11 @@ class CompDetailActivity : AppCompatActivity() {
         Log.d("MyAdapter2", "Button clicked for taskId: $taskIdInt") // ログで確認
 
         Log.d("MyAdapter2", "Button clicked for taskId: $taskIdInt") // ログで確認
+
+        Log.d("MyAdapter2", "Button clicked for taskId: $taskIdInt") // ログで確認
         
         Log.d("marge?: $taskIdInt") // ログで確認
+
         //渡された値に対応するendPagesListの要素を表示
         if (taskIdInt != -1) {
             // taskIdIntを使用して、endPagesListの対応するPageを取得
