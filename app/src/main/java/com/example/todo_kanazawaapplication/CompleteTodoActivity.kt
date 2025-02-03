@@ -53,7 +53,7 @@ class CompleteTodoActivity : AppCompatActivity() {
                         Log.e("formatChange", "LocalTimeError")
                         null
                     }
-
+                    Log.e("formatChange", "LocalTimeError")
                     //endPagesListに格納
                     if (taskTitleText.isNotEmpty() && taskContentText.isNotEmpty() && taskDate != null) {
                         val newTask = Page(
